@@ -27,17 +27,6 @@ export const useAppStore = defineStore('app', {
             alert(error)
             console.log(error)
         }
-      },
-      async fetchSingleFailedImages() {
-        try {
-          const data = await axios.get(`${apiUrl}/failed-images`)
-            this.singleFailedImg = data.data.results.items
-            console.log(this.singleFailedImg)
-          }
-          catch (error) {
-            alert(error)
-            console.log(error)
-        }
       }
     },
 

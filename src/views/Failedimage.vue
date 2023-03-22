@@ -1,7 +1,7 @@
 <template>
     <div>
 <h1>Failed Images</h1>
-{{ singleFailedImg[0] }}
+{{ failedImages[0] }}
     </div>
 </template>
 
@@ -16,14 +16,10 @@ const failedImages = computed(() => {
   return store.failedImages;
 });
 
-const singleFailedImg = computed(() => {
-  return store.singleFailedImg;
-});
 
 
 onMounted(() => {
   store.fetchFailedImages();
-  store.fetchSingleFailedImages();
 })
 
 
