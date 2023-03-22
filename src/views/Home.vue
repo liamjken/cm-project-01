@@ -11,7 +11,12 @@
             alternating
     :headers="headers"
     :items="items"
-  />
+  >
+  <template #item-indicator.action="item">
+    <a :href="`${item.src}-Original`" target="_blank">Open Image</a>
+    </template>
+
+</EasyDataTable>
 
 
 
@@ -48,12 +53,12 @@ const headers: Header[] = [
   { text: "File Name", value: "name" },
   { text: "Status", value: "status"},
   { text: "Last Updated", value: "updatedAt"},
-  { text: "Action", value: "src" },
+  { text: "Action", value: "indicator.action" },
 ];
 
 
 
-const items: Item[] = failedImages
+const items = failedImages
 
 
 </script>

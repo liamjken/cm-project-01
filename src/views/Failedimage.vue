@@ -1,7 +1,7 @@
 <template>
     <div>
 <h1>Failed Images</h1>
-{{ singleFailedImg }}
+{{ singleFailedImg[0] }}
     </div>
 </template>
 
