@@ -8,6 +8,7 @@ export const useAppStore = defineStore('app', {
   state: () => ({
 
     failedImages: [],
+    singleFailedImg: ''
   }),
   getters: {
     getfailedImages(state){
@@ -21,6 +22,17 @@ export const useAppStore = defineStore('app', {
           const data = await axios.get(`${apiUrl}/failed-images`)
             this.failedImages = data.data.results.items
             console.log(this.failedImages)
+          }
+          catch (error) {
+            alert(error)
+            console.log(error)
+        }
+      },
+      async fetchSingleFailedImages() {
+        try {
+          const data = await axios.get(`${apiUrl}/failed-images`)
+            this.singleFailedImg = data.data.results.items
+            console.log(this.singleFailedImg)
           }
           catch (error) {
             alert(error)

@@ -65,10 +65,5 @@ const items: Item[] = failedImages
   --easy-table-body-even-row-background-color: #f5f5f5;
 }
 
-
-.customize-table  tr:nth-child(even) {
-  background: #8a2626;
-}
-
 </style>
 
