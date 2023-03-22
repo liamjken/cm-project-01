@@ -37,6 +37,7 @@ const failedImages = computed(() => {
   return store.failedImages;
 });
 
+
 onMounted(() => {
   store.fetchFailedImages();
 })
