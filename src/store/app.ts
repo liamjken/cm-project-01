@@ -8,7 +8,6 @@ export const useAppStore = defineStore('app', {
   state: () => ({
 
     failedImages: [],
-    singleFailedImg: ''
   }),
   getters: {
     getfailedImages(state){
