@@ -9,7 +9,7 @@ export const useAppStore = defineStore('app', {
   state: () => ({
 
     failedImages: [],
-    isImageValid: false,
+    isImageValid: true,
 
   }),
   getters: {
@@ -31,7 +31,7 @@ export const useAppStore = defineStore('app', {
         }
       },
       ImgErCheck() {
-        this.isImageValid = !this.isImageValid
+        this.isImageValid = false
 
       },
 
