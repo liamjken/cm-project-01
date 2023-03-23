@@ -23,7 +23,6 @@ export const useAppStore = defineStore('app', {
         try {
           const data = await axios.get(`${apiUrl}/failed-images`)
             this.failedImages = data.data.results.items
-            console.log(this.failedImages)
           }
           catch (error) {
             alert(error)
@@ -32,14 +31,8 @@ export const useAppStore = defineStore('app', {
       },
       ImgErCheck() {
         this.isImageValid = false
-
+        return this.isImageValid
       },
-
-      isImgValid() {
-        if(this.isImageValid === false){
-          console.log('false')
-        } console.log('true')
-      }
 
     },
 

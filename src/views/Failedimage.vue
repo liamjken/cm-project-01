@@ -3,12 +3,12 @@
       <v-row no-gutters>
         <v-col cols="12">
           <v-sheet class="">
-            <h1>Failed Images</h1>
-            <p>This page is {{ $route.params.vehId }}/{{ $route.params.imgName }}</p>
-<img :src="`https://cm2p0vehiclemediadev.blob.core.windows.net/vehicle-media/${$route.params.vehId}/${$route.params.imgName}-Resized`" 
+ <div><img :src="`https://cm2p0vehiclemediadev.blob.core.windows.net/vehicle-media/${$route.params.vehId}/${$route.params.imgName}-Resized`" 
 :width="800"
 @error="store.ImgErCheck"
-/>
+v-if="store.isImageValid === true"
+/></div>
+<h1 v-if="store.isImageValid === false"> 404 Page Not Found</h1>
           </v-sheet>
         </v-col>
         </v-row>
@@ -32,7 +32,6 @@ const failedImages = computed(() => {
 
 onMounted(() => {
   store.fetchFailedImages();
-  console.log(store.isImageValid)
 })
 
 
