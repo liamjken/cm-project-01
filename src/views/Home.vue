@@ -13,7 +13,8 @@
     :items="items"
   >
   <template #item-indicator.action="item">
-    <a :href="`${item.src}-Original`" target="_blank">Open Image</a>
+    <Router-link :to="`/Failedimage/${item.vehicleId}/${item.name}`">Open Image</Router-link>
+
     </template>
 
 </EasyDataTable>

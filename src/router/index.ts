@@ -14,9 +14,10 @@ const routes = [
         component: Home,
       },
         {
-          path: '/Failedimage',
+          path: '/Failedimage/:vehId/:imgName',
           name: 'Failedimage',
-          component: Failedimage
+          component: Failedimage,
+          props: true
       },
     ],
   },

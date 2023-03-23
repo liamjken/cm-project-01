@@ -8,7 +8,8 @@ export const useAppStore = defineStore('app', {
   state: () => ({
 
     failedImages: [],
-    singleFailedImg: ''
+    isImageValid: false,
+
   }),
   getters: {
     getfailedImages(state){
@@ -29,6 +30,7 @@ export const useAppStore = defineStore('app', {
         }
       }
     },
+    
 
     //
   })
