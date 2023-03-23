@@ -5,11 +5,10 @@
           <v-sheet class="">
             <h1>Failed Images</h1>
             <p>This page is {{ $route.params.vehId }}/{{ $route.params.imgName }}</p>
-            <v-img
-  :width="800"
-  contain
-  :src="`https://cm2p0vehiclemediadev.blob.core.windows.net/vehicle-media/${$route.params.vehId}/${$route.params.imgName}-Resized`"
-></v-img>
+<img :src="`https://cm2p0vehiclemediadev.blob.core.windows.net/vehicle-media/${$route.params.vehId}/${$route.params.imgName}-Resized`" 
+:width="800"
+@error="store.ImgErCheck"
+/>
           </v-sheet>
         </v-col>
         </v-row>
@@ -20,7 +19,7 @@
 
 
   
-import { ref, onMounted, computed } from "vue";
+import { ref, onMounted, computed, onUpdated } from "vue";
 import { useAppStore } from '../store/app'
 
 
@@ -33,8 +32,8 @@ const failedImages = computed(() => {
 
 onMounted(() => {
   store.fetchFailedImages();
+  console.log(store.isImageValid)
 })
-
 
 
 </script>

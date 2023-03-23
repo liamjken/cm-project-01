@@ -1,6 +1,7 @@
 // Utilities
 import { defineStore } from 'pinia'
 import axios from 'axios'
+import Vue from 'vue'
 
 let apiUrl = 'https://qualitycontrol-service.dev.carpix2p0.net/api/1.0'
 
@@ -28,10 +29,22 @@ export const useAppStore = defineStore('app', {
             alert(error)
             console.log(error)
         }
+      },
+      ImgErCheck() {
+        this.isImageValid = !this.isImageValid
+
+      },
+
+      isImgValid() {
+        if(this.isImageValid === false){
+          console.log('false')
+        } console.log('true')
       }
+
     },
+
+    
     
 
     //
   })
-
