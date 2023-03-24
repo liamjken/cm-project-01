@@ -18,7 +18,8 @@ export const useAppStore = defineStore('app', {
       }
   },
 
-    actions: {
+  actions: {
+    // Getting the API data
       async fetchFailedImages() {
         try {
           const data = await axios.get(`${apiUrl}/failed-images`)
@@ -29,6 +30,7 @@ export const useAppStore = defineStore('app', {
             console.log(error)
         }
       },
+      // This function is via @error request in Failedimage.vue works but not exactly how I expected.
       ImgErCheck() {
         this.isImageValid = false
         return this.isImageValid
