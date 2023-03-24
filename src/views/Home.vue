@@ -11,7 +11,7 @@
           :headers="headers"
           :items="items"
         >
-
+<!-- Creating the button to Open Image -->
 <template #item-indicator.action="item">
   <v-btn 
     class="mt-3 mb-3"
@@ -31,6 +31,19 @@
     </Router-link>
   </v-btn>
 </template>
+
+
+<!-- Creating the button to Open Image -->
+<template #item-indicator.status="item">
+  <span :class="[  
+    item.status === 'NeedEditing' ? 'need-edit' :  
+    item.status === 'Editing' ? 'edit' :  
+    'default'
+    ]">{{ item.status }}</span>
+
+</template>
+
+
         </EasyDataTable>
       </v-sheet>
     </v-col>
@@ -67,7 +80,7 @@ onMounted(() => {
 
 const headers: Header[] = [
       { text: "File Name", value: "name" },
-      { text: "Status", value: "status"},
+      { text: "Status", value: "indicator.status"},
       { text: "Last Updated", value: "updatedAt"},
       { text: "Action", value: "indicator.action" },
 ];
@@ -82,6 +95,25 @@ const items = failedImages
 .customize-table {
   --easy-table-header-background-color: #f5f5f5;
   --easy-table-body-even-row-background-color: #f5f5f5;
+}
+
+.need-edit{
+  background: #ffdfe5;
+    padding: 10px;
+    border-radius: 5px;
+    color: #a03030;
+    font-weight: bolder;
+    border: 1px solid #a03030;
+}
+
+.edit{
+  background: #d4edd1;
+    padding: 10px;
+    border-radius: 5px;
+    color: #0d634b;
+    font-weight: bolder;
+    border: 1px solid #0d634b;
+
 }
 
 </style>

@@ -35,6 +35,7 @@ export const useAppStore = defineStore('app', {
         this.isImageValid = false
         return this.isImageValid
       },
+  
 
     },
 
