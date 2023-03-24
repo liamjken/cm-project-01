@@ -1,14 +1,19 @@
 <template>
 <v-container class="align-items-center">
-    <v-row no-gutters>
+    <v-row>
         <v-col cols="12">
-
-            <v-btn 
+        <v-btn 
                 @click="$router.go(-1)"
                 class="mt-3 mb-3"
                 prepend-icon="mdi-arrow-left"
                 color="primary">Back
             </v-btn>
+        </v-col>
+    </v-row>
+    <v-row no-gutters>
+        <v-col cols="12">
+
+
             <!-- Image displayed from Two route Params values. 
                  If image src is not found it runs ImgErCheck
                 function which updates isImageValid value.
