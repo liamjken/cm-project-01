@@ -43,7 +43,7 @@
                     @error="store.ImgErCheck"
                     v-if="store.isImageValid === true"
                     />
-                    <h1 v-if="store.isImageValid === false"> 404 Page Not Found</h1>
+                    <h1 v-if="store.isImageValid === false">Page Not Found</h1>
 
         </v-col>
         <v-col
