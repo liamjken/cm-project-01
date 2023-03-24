@@ -13,7 +13,21 @@
     :items="items"
   >
   <template #item-indicator.action="item">
-    <Router-link :to="`/Failedimage/${item.vehicleId}/${item.name}`">Open Image</Router-link>
+    <v-btn 
+    class="mt-3 mb-3"
+    prepend-icon="mdi-check-circle"
+    color="primary">
+      
+      <Router-link 
+      class="text-decoration-none" 
+      :to="`/Failedimage/${item.vehicleId}/${item.name}`">
+      <span 
+      class="
+      text-decoration-none 
+      text-white">
+      Open Image
+    </span>
+  </Router-link></v-btn>
 
     </template>
 

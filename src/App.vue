@@ -19,3 +19,9 @@
   </v-main>
 </v-app>
 </template>
+
+<style>
+.v-main{
+  background: lightgray;
+}
+</style>
