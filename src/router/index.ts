@@ -2,6 +2,7 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import Home from '../views/Home.vue'
 import Failedimage from '../views/Failedimage.vue'
+import Sandbox from '../views/Sandbox.vue'
 
 const routes = [
   {
@@ -19,6 +20,11 @@ const routes = [
           component: Failedimage,
           props: true
       },
+      {
+        path: '/Sandbox',
+        name: 'Sandbox',
+        component: Sandbox,
+    },
     ],
   },
 ]

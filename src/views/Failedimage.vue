@@ -1,7 +1,13 @@
 <template>
 <v-container class="align-items-center">
     <v-row>
-        <v-col cols="12">
+        <v-col
+              cols="12"
+              sm="1"
+            >
+            </v-col>
+        <v-col cols="12"
+        sm="10">
         <v-btn 
                 @click="$router.go(-1)"
                 class="mt-3 mb-3"
@@ -9,9 +15,20 @@
                 color="primary">Back
             </v-btn>
         </v-col>
+        <v-col
+              cols="12"
+              sm="1"
+            >
+            </v-col>
     </v-row>
     <v-row no-gutters>
-        <v-col cols="12">
+        <v-col
+              cols="12"
+              sm="1"
+            >
+            </v-col>
+        <v-col cols="12"
+        sm="10">
 
 
             <!-- Image displayed from Two route Params values. 
@@ -29,6 +46,11 @@
                     <h1 v-if="store.isImageValid === false"> 404 Page Not Found</h1>
 
         </v-col>
+        <v-col
+              cols="12"
+              sm="1"
+            >
+            </v-col>
     </v-row>
 </v-container>
 </template>
