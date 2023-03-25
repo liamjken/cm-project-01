@@ -35,7 +35,25 @@ export const useAppStore = defineStore('app', {
         this.isImageValid = false
         return this.isImageValid
       },
-  
+
+    async PostEditImg(dvId:string, nameId:string, status:number) {
+      try {
+        const data = await axios.post(``,  {
+          "dealerVehicleListingId": `${dvId}`,
+          "imageStatuses": [
+            {
+              "id": `${nameId}`,
+              "processingStatus": `${status}`
+            }
+          ]
+        })
+       
+        }
+        catch (error) {
+          alert(error)
+          console.log(error)
+      }
+      }
 
     },
 

@@ -10,10 +10,23 @@
         sm="10">
         <v-btn 
                 @click="$router.go(-1)"
-                class="mt-3 mb-3"
+                class="mt-3 mb-3 float-left"
                 prepend-icon="mdi-arrow-left"
                 color="primary">Back
             </v-btn>
+
+            <div v-for="img in failedImages" :key="img.name">
+                <div v-if="img.name === $route.params.imgName && img.status === 'Editing'">
+                    <v-btn 
+                @click="store.PostEditImg(img.vehicleId, img.name, 5)"
+                class="mt-3 mb-3 float-right"
+                prepend-icon=""
+                color="primary">Completed
+            </v-btn>
+                </div>
+            </div>
+
+
         </v-col>
         <v-col
               cols="12"
