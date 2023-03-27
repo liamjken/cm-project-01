@@ -38,7 +38,7 @@ export const useAppStore = defineStore('app', {
 
     async PostEditImg(dvId:string, nameId:string, status:number) {
       try {
-        const data = await axios.post(``,  {
+        const data = await axios.post(`https://qualitycontrol-service.dev.carpix2p0.net/api/1.0/dealer-vehicle-listings/${dvId}/images/update-statuses`,  {
           "dealerVehicleListingId": `${dvId}`,
           "imageStatuses": [
             {
