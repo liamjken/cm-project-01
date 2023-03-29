@@ -19,7 +19,7 @@
             <div v-for="img in failedImages" :key="img.name">
                 <div v-if="img.name === $route.params.imgName && img.status === 'Editing'">
                     <v-btn 
-                @click.once="PostEditImg(img.vehicleId, img.name, 5), $router.go(-1)"
+                @click.once="PostEditImg(img.vehicleId, img.name, 5), $router.push('/')"
                 class="mt-3 mb-3 float-right"
                 prepend-icon=""
                 color="primary">Completed

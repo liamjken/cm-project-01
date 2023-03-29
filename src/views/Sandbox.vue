@@ -2,7 +2,7 @@
       <v-dialog
         transition="dialog-bottom-transition"
         width="auto"
-        v-model="dialog"
+        v-model="store.completed"
       >
         <template v-slot:default="{ isActive }">
           <v-card>
@@ -24,41 +24,38 @@
       </v-dialog>
 </template>
 
-<script lang="ts">
-import { mapActions, mapState } from 'pinia';
-import { defineComponent } from 'vue'
+<script lang="ts" setup>
+  
+import type { Header, Item } from "vue3-easy-data-table";
+import { ref, onMounted, computed } from "vue";
 import { useAppStore } from '../store/app'
 
 
+const store = useAppStore()
+const msg = ref("testing pina and axios")
+
+const getfailedImages = computed(() => {
+      return store.getfailedImages;
+});
+
+const failedImages = computed(() => {
+      return store.failedImages;
+});
 
 
-export default defineComponent({
-
-  data: () => ({
-    dialog: true
-  }),
-  created() {
-    this.fetchFailedImages();
-  },
-  mounted() {
-    this.dialog = true
-  },
-  computed: {
-   ...mapState(useAppStore, 
-   ['failedImages', 'completed', 'isImageValid'])
-  },
-  methods: {
-    ...mapActions(useAppStore,[
-    'fetchFailedImages',
-    'PostEditImg',
-    'ImgErCheck'
-    ]),
-
-    
-  }
-
-
-
-
+onMounted(() => {
+      store.fetchFailedImages();
 })
+
+
+
+const headers: Header[] = [
+      { text: "File Name", value: "name" },
+      { text: "Status", value: "indicator.status"},
+      { text: "Last Updated", value: "updatedAt"},
+      { text: "Action", value: "indicator.action" },
+];
+
+const items = failedImages
+
 </script>

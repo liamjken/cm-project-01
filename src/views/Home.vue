@@ -1,4 +1,27 @@
 <template>
+        <v-dialog
+        transition="dialog-bottom-transition"
+        width="auto"
+        v-model="store.completed"
+      >
+        <template v-slot:default="{ isActive }">
+          <v-card>
+            <v-toolbar
+              color="primary"
+              title="Image Update"
+            ></v-toolbar>
+            <v-card-text>
+              <div class="text-h4 pa-12">The image has been updated on the server!</div>
+            </v-card-text>
+            <v-card-actions class="justify-end">
+              <v-btn
+                variant="text"
+                @click="isActive.value = false"
+              >Close</v-btn>
+            </v-card-actions>
+          </v-card>
+        </template>
+      </v-dialog>
 <v-container>
   <v-row no-gutters>
     <v-col cols="12">
@@ -49,7 +72,6 @@
     </v-col>
   </v-row>
 </v-container>
-
 
 
 </template>
