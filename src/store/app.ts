@@ -10,6 +10,7 @@ export const useAppStore = defineStore('app', {
 
     failedImages: [],
     isImageValid: true,
+    completed: false
 
   }),
   getters: {
@@ -36,9 +37,9 @@ export const useAppStore = defineStore('app', {
         return this.isImageValid
       },
 
-    async PostEditImg(dvId:string, nameId:string, status:number) {
+ async PostEditImg(dvId:string, nameId:string, status:number) {
       try {
-        const data = await axios.post(`https://qualitycontrol-service.dev.carpix2p0.net/api/1.0/dealer-vehicle-listings/${dvId}/images/update-statuses`,  {
+        const data = await axios.put(`https://qualitycontrol-service.dev.carpix2p0.net/api/1.0/dealer-vehicle-listings/${dvId}/images/update-statuses`,  {
           "dealerVehicleListingId": `${dvId}`,
           "imageStatuses": [
             {
@@ -47,12 +48,19 @@ export const useAppStore = defineStore('app', {
             }
           ]
         })
-       
+       if(data.status === 200) {
+        this.completed = true
+       }
+       console.log(data.status)
         }
         catch (error) {
           alert(error)
           console.log(error)
       }
+      },
+
+      btnDisabled() {
+        
       }
 
     },

@@ -8,6 +8,7 @@
             </v-col>
         <v-col cols="12"
         sm="10">
+
         <v-btn 
                 @click="$router.go(-1)"
                 class="mt-3 mb-3 float-left"
@@ -18,14 +19,14 @@
             <div v-for="img in failedImages" :key="img.name">
                 <div v-if="img.name === $route.params.imgName && img.status === 'Editing'">
                     <v-btn 
-                @click="store.PostEditImg(img.vehicleId, img.name, 5)"
+                @click.once="PostEditImg(img.vehicleId, img.name, 5), $router.go(-1)"
                 class="mt-3 mb-3 float-right"
                 prepend-icon=""
                 color="primary">Completed
             </v-btn>
+
                 </div>
             </div>
-
 
         </v-col>
         <v-col
@@ -53,10 +54,10 @@
             -->
                     <img 
                     :src="`https://cm2p0vehiclemediadev.blob.core.windows.net/vehicle-media/${$route.params.vehId}/${$route.params.imgName}-Resized`" 
-                    @error="store.ImgErCheck"
-                    v-if="store.isImageValid === true"
+                    @error="ImgErCheck"
+                    v-if="isImageValid === true"
                     />
-                    <h1 v-if="store.isImageValid === false">Page Not Found</h1>
+                    <h1 v-if="isImageValid === false">Page Not Found</h1>
 
         </v-col>
         <v-col
@@ -68,26 +69,40 @@
 </v-container>
 </template>
 
-<script lang="ts" setup>
-
-
-  
-import { ref, onMounted, computed, onUpdated } from "vue";
+<script lang="ts">
+import { mapActions, mapState } from 'pinia';
+import { defineComponent } from 'vue'
 import { useAppStore } from '../store/app'
 
 
-const store = useAppStore()
-const failedImages = computed(() => {
-  return store.failedImages;
-});
+
+
+export default defineComponent({
+
+  data: () => ({}),
+  created() {
+    this.fetchFailedImages();
+  },
+  mounted() {
+  },
+  computed: {
+   ...mapState(useAppStore, 
+   ['failedImages', 'completed', 'isImageValid'])
+  },
+  methods: {
+    ...mapActions(useAppStore,[
+    'fetchFailedImages',
+    'PostEditImg',
+    'ImgErCheck'
+    ]),
+
+    
+  }
 
 
 
-onMounted(() => {
-  store.fetchFailedImages();
+
 })
-
-
 </script>
 
 <style scoped>
