@@ -1,5 +1,5 @@
 <template>
-
+<!-- Dialog Box that appears when Failed Image Status is updated. -->
     <Dialogbox>
     <template v-slot:title>
       Image Updated
@@ -8,6 +8,7 @@
       The image has been updated on the server!
     </template>
   </Dialogbox>
+
 <v-container>
   <v-row no-gutters>
     <v-col cols="12">
@@ -42,7 +43,7 @@
 </template>
 
 
-<!-- Creating the button to Open Image -->
+<!-- Applying className depending on item status -->
 <template #item-indicator.status="item">
   <span :class="[  
     item.status === 'NeedEditing' ? 'need-edit' :  
@@ -53,7 +54,7 @@
 </template>
 
 
-        </EasyDataTable>
+      </EasyDataTable>
       </v-sheet>
     </v-col>
   </v-row>
