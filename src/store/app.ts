@@ -10,7 +10,8 @@ export const useAppStore = defineStore('app', {
 
     failedImages: [],
     isImageValid: true,
-    completed: false
+    completed: false,
+    sandboxComp: true
 
   }),
   getters: {
@@ -59,8 +60,7 @@ export const useAppStore = defineStore('app', {
       }
       },
 
-      btnDisabled() {
-        
+      refreshPage() {
       }
 
     },

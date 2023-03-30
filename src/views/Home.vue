@@ -1,27 +1,13 @@
 <template>
-        <v-dialog
-        transition="dialog-bottom-transition"
-        width="auto"
-        v-model="store.completed"
-      >
-        <template v-slot:default="{ isActive }">
-          <v-card>
-            <v-toolbar
-              color="primary"
-              title="Image Update"
-            ></v-toolbar>
-            <v-card-text>
-              <div class="text-h4 pa-12">The image has been updated on the server!</div>
-            </v-card-text>
-            <v-card-actions class="justify-end">
-              <v-btn
-                variant="text"
-                @click="isActive.value = false"
-              >Close</v-btn>
-            </v-card-actions>
-          </v-card>
-        </template>
-      </v-dialog>
+
+    <Dialogbox>
+    <template v-slot:title>
+      Image Updated
+    </template>
+    <template v-slot:content>
+      The image has been updated on the server!
+    </template>
+  </Dialogbox>
 <v-container>
   <v-row no-gutters>
     <v-col cols="12">
@@ -80,9 +66,12 @@
 
 <script lang="ts" setup>
   
-import type { Header, Item } from "vue3-easy-data-table";
-import { ref, onMounted, computed } from "vue";
+import type { Header, Item } from "vue3-easy-data-table"
+import { ref, onMounted, computed } from "vue"
 import { useAppStore } from '../store/app'
+import Dialogbox from '../components/DialogBox.vue'
+
+const components = Dialogbox
 
 
 const store = useAppStore()
