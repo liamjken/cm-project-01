@@ -53,6 +53,24 @@
 
 </template>
 
+<!-- Creating the button to Open Image -->
+<template #item-indicator.actiontwo="item">
+  <v-btn v-if="item.status === 'NeedEditing'" 
+    class="mt-3 mb-3"
+    prepend-icon="mdi-cloud-download"
+    color="download"
+  >
+Download
+  </v-btn>
+
+  <v-btn v-if="item.status === 'Editing'"
+    class="mt-3 mb-3"
+    prepend-icon="mdi-cloud-upload"
+    color="upload"
+  >
+Upload
+  </v-btn>
+</template>
 
       </EasyDataTable>
       </v-sheet>
@@ -97,7 +115,8 @@ const headers: Header[] = [
       { text: "File Name", value: "name" },
       { text: "Status", value: "indicator.status"},
       { text: "Last Updated", value: "updatedAt"},
-      { text: "Action", value: "indicator.action" },
+      { text: "Image", value: "indicator.action" },
+      { text: "Action", value: "indicator.actiontwo" },
 ];
 
 const items = failedImages

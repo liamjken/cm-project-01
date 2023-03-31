@@ -20,6 +20,8 @@ export default createVuetify({
           primary: '#0d634b',
           secondary: '#88cf1b',
           masthead: '#231f20',
+          download: '#a03030',
+          upload: '#d4edd1'
         },
       },
     },
