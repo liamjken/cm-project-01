@@ -59,6 +59,7 @@
     class="mt-3 mb-3"
     prepend-icon="mdi-cloud-download"
     color="download"
+    @click.once="store.downloadImage(item.vehicleId, item.name)"
   >
 Download
   </v-btn>
@@ -67,6 +68,7 @@ Download
     class="mt-3 mb-3"
     prepend-icon="mdi-cloud-upload"
     color="upload"
+    @click.once="store.selectFile()"
   >
 Upload
   </v-btn>
@@ -120,6 +122,7 @@ const headers: Header[] = [
 ];
 
 const items = failedImages
+
 
 </script>
  
