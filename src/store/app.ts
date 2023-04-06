@@ -13,6 +13,7 @@ export const useAppStore = defineStore('app', {
     completed: false,
     sandboxComp: true,
     isSelecting: false,
+    uploadImgURL: 'url not found'
 
   }),
   getters: {
@@ -98,8 +99,8 @@ export const useAppStore = defineStore('app', {
           const data = await axios.post(`https://vehiclemedia-service.dev.carpix2p0.net/api/1.0/vehicle-media/vehicle-listings/${dvId}/upload-links/${nameId}/rewrite-link`,  {
             type: '-Original'
           })
-         const uploadImgURL = data.data.uploadUri
-         console.log(uploadImgURL)
+        this.uploadImgURL = data.data.uploadUri
+         console.log(this.uploadImgURL)
 
           }
           catch (error) {

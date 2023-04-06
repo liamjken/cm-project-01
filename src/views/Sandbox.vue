@@ -13,6 +13,7 @@
     <v-row no-gutters>
       <v-col cols="12">
         <v-sheet class="">
+          {{ uploadImgURL }}
           <EasyDataTable
             theme-color="#1d90ff"
             buttons-pagination
@@ -72,6 +73,9 @@
     >
   Upload
     </v-btn>
+    <v-btn
+    @click="onFileUpload"
+    >upload everything</v-btn>
       <input class="input-file__input" ref="file" type="file" @change="onFileSelected">
   </template>
   
@@ -100,6 +104,8 @@ export default defineComponent({
 data: () => ({
 
   mySelectedFile: null,
+  resResult: null,
+
   headers: [
       { text: "File Name", value: "name" },
       { text: "Status", value: "indicator.status"},
@@ -119,12 +125,13 @@ data: () => ({
   },
   computed: {
     ...mapState(useAppStore, 
-   ['failedImages', 'completed', 'isImageValid'])
+   ['failedImages', 'completed', 'isImageValid', 'uploadImgURL' ])
   },
   created() {
 
   },
   methods: {
+
     selectFile(){
       let fileInputElement : any = this.$refs.file;
       fileInputElement.click();
@@ -132,6 +139,16 @@ data: () => ({
     onFileSelected(event: any){
       this.mySelectedFile = event.target.files[0]
       return this.mySelectedFile
+    },
+ async onFileUpload() {
+    await axios.put(this.uploadImgURL, this.mySelectedFile, { headers: {
+              "Content-Type": "image/png",
+              "x-ms-blob-type": "BlockBlob"
+          }})
+      .then(res => {
+        console.log(res)
+      })
+  
     },
 
     ...mapActions(useAppStore,[
