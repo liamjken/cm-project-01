@@ -73,10 +73,7 @@
     >
   Upload
     </v-btn>
-    <v-btn
-    @click="onFileUpload"
-    >upload everything</v-btn>
-      <input class="input-file__input" ref="file" type="file" @change="onFileSelected">
+      <input class="input-file__input" ref="file" type="file" @change="onFileUpload">
   </template>
   
         </EasyDataTable>
@@ -136,11 +133,13 @@ data: () => ({
       let fileInputElement : any = this.$refs.file;
       fileInputElement.click();
     },
-    onFileSelected(event: any){
-      this.mySelectedFile = event.target.files[0]
-      return this.mySelectedFile
-    },
- async onFileUpload() {
+    //onFileSelected(event: any){
+     // this.mySelectedFile = event.target.files[0]
+    //  return this.mySelectedFile
+  
+   // },
+ async onFileUpload(event: any) {
+  this.mySelectedFile = event.target.files[0]
     await axios.put(this.uploadImgURL, this.mySelectedFile, { headers: {
               "Content-Type": "image/png",
               "x-ms-blob-type": "BlockBlob"
