@@ -13,7 +13,6 @@
     <v-row no-gutters>
       <v-col cols="12">
         <v-sheet class="">
-          {{ uploadImgURL }}
           <EasyDataTable
             theme-color="#1d90ff"
             buttons-pagination
@@ -71,9 +70,21 @@
       color="upload"
       @click="beforeUploadImage(item.vehicleId, item.name ), selectFile()"
     >
-  Upload
+  <span>Upload</span>
+
+      <v-overlay
+        :model-value="spinnerLoad"
+        class="align-center justify-center"
+      >
+        <v-progress-circular
+          color="primary"
+          indeterminate
+          size="64"
+        ></v-progress-circular>
+      </v-overlay>
+
     </v-btn>
-      <input class="input-file__input" ref="file" type="file" @change="onFileUpload">
+      <input class="input-file__input" ref="file" type="file" accept="image/png" @change="onFileUpload">
   </template>
   
         </EasyDataTable>
@@ -92,6 +103,7 @@ import { useAppStore } from '../store/app'
 import Dialogbox from '../components/DialogBox.vue'
 import { mapActions, mapState } from 'pinia';
 import axios from 'axios'
+import store from "@/store";
 
 export default defineComponent({
   components: {
@@ -102,6 +114,7 @@ data: () => ({
 
   mySelectedFile: null,
   resResult: null,
+  spinnerLoad: false,
 
   headers: [
       { text: "File Name", value: "name" },
@@ -138,7 +151,8 @@ data: () => ({
     //  return this.mySelectedFile
   
    // },
- async onFileUpload(event: any) {
+ async onFileUpload(event: any ) {
+  this.spinnerLoad = true
   this.mySelectedFile = event.target.files[0]
     await axios.put(this.uploadImgURL, this.mySelectedFile, { headers: {
               "Content-Type": "image/png",
@@ -146,7 +160,13 @@ data: () => ({
           }})
       .then(res => {
         console.log(res)
+        if(res.status === 201) {
+          this.dialogStatUpdate()
+       }
       })
+.finally(() => {
+  this.spinnerLoad = false
+})
   
     },
 
@@ -155,13 +175,19 @@ data: () => ({
     'PostEditImg',
     'ImgErCheck',
     'downloadImage',
-    "beforeUploadImage"
+    "beforeUploadImage",
+    'dialogStatUpdate'
     ]),
 
   },
   watch: {
     failedImages(newVal) {
       this.items = newVal;
+    },
+    spinnerLoad (val) {
+      val && setTimeout(() => {
+        this.spinnerLoad = false
+      }, 3000)
     }
   }
 
