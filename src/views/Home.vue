@@ -151,7 +151,7 @@ data: () => ({
     //  return this.mySelectedFile
   
    // },
- async onFileUpload(event: any, test: string ) {
+ async onFileUpload(event: any, dvid: string ) {
   this.spinnerLoad = true
   this.mySelectedFile = event.target.files[0]
     await axios.put(this.uploadImgURL, this.mySelectedFile, { headers: {
@@ -160,7 +160,7 @@ data: () => ({
           }})
       .then(res => {
         console.log(res)
-        console.log(test)
+        console.log(dvid)
         if(res.status === 201) {
           this.dialogStatUpdate()
        }
