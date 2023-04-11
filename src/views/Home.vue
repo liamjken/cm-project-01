@@ -146,11 +146,6 @@ data: () => ({
       let fileInputElement : any = this.$refs.file;
       fileInputElement.click();
     },
-    //onFileSelected(event: any){
-     // this.mySelectedFile = event.target.files[0]
-    //  return this.mySelectedFile
-  
-   // },
  async onFileUpload(event: any, dvId: any, nameId: any ) {
   this.spinnerLoad = true
   this.mySelectedFile = event.target.files[0]
