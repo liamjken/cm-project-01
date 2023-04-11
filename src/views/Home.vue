@@ -82,9 +82,9 @@
           size="64"
         ></v-progress-circular>
       </v-overlay>
-
+      <input class="input-file__input" ref="file" type="file" accept="image/png" @change="(event) => onFileUpload(event, item.vehicleId, item.name)">
     </v-btn>
-      <input class="input-file__input" ref="file" type="file" accept="image/png" @change="(event) => onFileUpload(event, item.status)">
+
   </template>
   
         </EasyDataTable>
@@ -151,7 +151,7 @@ data: () => ({
     //  return this.mySelectedFile
   
    // },
- async onFileUpload(event: any, dvid: string ) {
+ async onFileUpload(event: any, dvId: any, nameId: any ) {
   this.spinnerLoad = true
   this.mySelectedFile = event.target.files[0]
     await axios.put(this.uploadImgURL, this.mySelectedFile, { headers: {
@@ -160,13 +160,13 @@ data: () => ({
           }})
       .then(res => {
         console.log(res)
-        console.log(dvid)
         if(res.status === 201) {
           this.dialogStatUpdate()
        }
       })
 .finally(() => {
   this.spinnerLoad = false
+  this.endStatusUpdate(dvId, nameId)
 })
   
     },
@@ -177,7 +177,8 @@ data: () => ({
     'ImgErCheck',
     'downloadImage',
     "beforeUploadImage",
-    'dialogStatUpdate'
+    'dialogStatUpdate',
+    'endStatusUpdate'
     ]),
 
   },

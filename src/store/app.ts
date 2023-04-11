@@ -101,15 +101,6 @@ export const useAppStore = defineStore('app', {
           })
         this.uploadImgURL = data.data.uploadUri
          console.log(this.uploadImgURL)
-          await axios.put(`https://qualitycontrol-service.dev.carpix2p0.net/api/1.0/dealer-vehicle-listings/${dvId}/images/update-statuses`,  {
-          "dealerVehicleListingId": `${dvId}`,
-          "imageStatuses": [
-            {
-              "id": `${nameId}`,
-              "processingStatus": '5'
-            }
-          ]
-        })
 
           }
           catch (error) {
@@ -121,6 +112,24 @@ export const useAppStore = defineStore('app', {
 
         dialogStatUpdate(){
         this.completed = true
+
+        },
+
+       async endStatusUpdate(dvId:any, nameId:any) {
+        try {
+          await axios.put(`https://qualitycontrol-service.dev.carpix2p0.net/api/1.0/dealer-vehicle-listings/${dvId}/images/update-statuses`,  {
+            "dealerVehicleListingId": `${dvId}`,
+            "imageStatuses": [
+              {
+                "id": `${nameId}`,
+                "processingStatus": '5'
+              }
+            ]
+          })
+        } catch (error) {
+          alert(error)
+          console.log(error)
+        }
 
         }
 

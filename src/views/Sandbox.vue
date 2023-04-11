@@ -176,7 +176,7 @@ data: () => ({
     'ImgErCheck',
     'downloadImage',
     "beforeUploadImage",
-    'dialogStatUpdate'
+    'dialogStatUpdate',
     ]),
 
   },
