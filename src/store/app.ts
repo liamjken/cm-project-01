@@ -13,7 +13,9 @@ export const useAppStore = defineStore('app', {
     completed: false,
     sandboxComp: true,
     isSelecting: false,
-    uploadImgURL: 'url not found'
+    uploadImgURL: 'url not found',
+    doubleCheck: false
+
 
   }),
   getters: {
@@ -87,12 +89,13 @@ export const useAppStore = defineStore('app', {
             ]
           })
          console.log(data.status)
+         if(data.status == 200){
+         }
           }
           catch (error) {
             alert(error)
             console.log(error)
         }
-
       },
       async beforeUploadImage(dvId:string, nameId:string) {
         try {
@@ -130,7 +133,6 @@ export const useAppStore = defineStore('app', {
           alert(error)
           console.log(error)
         }
-
         },
 
         mylogin (email: string, password: string) {
@@ -152,7 +154,11 @@ export const useAppStore = defineStore('app', {
 
         mylogout() {
           sessionStorage.removeItem("role")
-        }
+        },
+
+        updateCheck(){
+         this.doubleCheck = !this.doubleCheck
+        },
 
     },
 

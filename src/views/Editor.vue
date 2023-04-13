@@ -59,11 +59,11 @@
         class="mt-3 mb-3"
         prepend-icon="mdi-cloud-download"
         color="download"
-        @click.once="downloadImage(item.vehicleId, item.name)"
+        @click.once="downloadImage(item.vehicleId, item.name), updateCheck()"
       >
     Download
       </v-btn>
-    
+
       <v-btn  v-if="item.status === 'Editing'" 
         class="mt-3 mb-3"
         prepend-icon="mdi-cloud-upload"
@@ -103,7 +103,6 @@
   import Dialogbox from '../components/DialogBox.vue'
   import { mapActions, mapState } from 'pinia';
   import axios from 'axios'
-  import store from "@/store";
   
   export default defineComponent({
     components: {
@@ -115,6 +114,8 @@
     mySelectedFile: null,
     resResult: null,
     spinnerLoad: false,
+    doubleCheck: false,
+
   
     headers: [
         { text: "File Name", value: "name" },
@@ -133,6 +134,9 @@
       this.fetchFailedImages();
   
     },
+    updated() {
+    },
+
     computed: {
       ...mapState(useAppStore, 
      ['failedImages', 'completed', 'isImageValid', 'uploadImgURL' ])
@@ -157,6 +161,7 @@
           console.log(res)
           if(res.status === 201) {
             this.dialogStatUpdate()
+            this.updateCheck()
          }
         })
   .finally(() => {
@@ -173,8 +178,12 @@
       'downloadImage',
       "beforeUploadImage",
       'dialogStatUpdate',
-      'endStatusUpdate'
+      'endStatusUpdate',
       ]),
+
+      updateCheck(){
+         this.doubleCheck = !this.doubleCheck
+        },
   
     },
     watch: {
@@ -184,8 +193,17 @@
       spinnerLoad (val) {
         val && setTimeout(() => {
           this.spinnerLoad = false
-        }, 3000)
+        }, 5000)
+      },
+      doubleCheck(value) {
+        if (value === true) {
+          setTimeout(() => {
+          this.fetchFailedImages()
+          this.doubleCheck = false
+        }, 1000)
+        }
       }
+      
     }
   
   
