@@ -131,6 +131,27 @@ export const useAppStore = defineStore('app', {
           console.log(error)
         }
 
+        },
+
+        mylogin (email: string, password: string) {
+
+          let editor = 'editor@test.com'
+          let reviewer = 'reviewer@test.com'
+          let pass = 'Auto123'
+
+          if(email == editor && password == pass){
+            sessionStorage.setItem("role", 'hzc*EUW_vay4zue4gdb');
+            return 'editor'
+          } else if (email == reviewer && password == pass) {
+            sessionStorage.setItem("role", 'hqc2xfn_buv3yuj5MEC');
+            return 'reviewer'
+          }
+          return null
+
+        },
+
+        mylogout() {
+          sessionStorage.removeItem("role")
         }
 
     },
