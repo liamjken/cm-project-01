@@ -1,6 +1,6 @@
 <template>
     <!-- Dialog Box that appears when Failed Image Status is updated. -->
-        <Dialogbox>
+        <Dialogbox @dialog-closed="updateCheck()">
         <template v-slot:title>
           Image Updated
         </template>
@@ -183,6 +183,7 @@
 
       updateCheck(){
          this.doubleCheck = !this.doubleCheck
+         console.log(this.doubleCheck)
         },
   
     },
@@ -202,7 +203,7 @@
           this.doubleCheck = false
         }, 1000)
         }
-      }
+      },
       
     }
   

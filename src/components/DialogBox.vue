@@ -20,7 +20,7 @@
                         <v-card-actions class="justify-end">
                             <v-btn
                             variant="text"
-                            @click="isActive.value = false"
+                            @click="isActive.value = false, $emit('dialog-closed')"
                             >Close</v-btn>
                         </v-card-actions>
             </v-card>
