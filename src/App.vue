@@ -51,7 +51,7 @@
       ]),
 
       userlogOut() {
-        this.mylogout 
+        this.mylogout() 
         this.$router.replace('/')
       }
 
