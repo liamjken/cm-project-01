@@ -82,7 +82,7 @@
             size="64"
           ></v-progress-circular>
         </v-overlay>
-        <input class="input-file__input" ref="file" type="file" accept="image/png" @change="(event) => onFileUpload(event, item.vehicleId, item.name)">
+        <input class="input-file__input" ref="file" type="file" accept="image/png" @change="(event) => onFileUpload(event, item.vehicleId, item.name, 5)">
       </v-btn>
   
     </template>
@@ -150,7 +150,7 @@
         let fileInputElement : any = this.$refs.file;
         fileInputElement.click();
       },
-   async onFileUpload(event: any, dvId: any, nameId: any ) {
+   async onFileUpload(event: any, dvId: any, nameId: any, status: number ) {
     this.spinnerLoad = true
     this.mySelectedFile = event.target.files[0]
       await axios.put(this.uploadImgURL, this.mySelectedFile, { headers: {
@@ -166,7 +166,7 @@
         })
   .finally(() => {
     this.spinnerLoad = false
-    this.endStatusUpdate(dvId, nameId)
+    this.endStatusUpdate(dvId, nameId, status)
   })
     
       },
