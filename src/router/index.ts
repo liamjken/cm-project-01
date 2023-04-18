@@ -35,6 +35,17 @@ function isReviewer(to: any, from: any, next:any) {
 
 }
 
+function isLoggedin(to: any, from: any, next:any){
+  let userRole = sessionStorage.getItem('role')
+  if (userRole == 'hqc2xfn_buv3yuj5MEC') {
+    next({ path: '/Reviewer' })
+  } else if (userRole == 'hzc*EUW_vay4zue4gdb') {
+    next({ path: '/Editor' })
+} else {
+  next()
+  return
+}}
+
 const routes = [
   {
     path: '/',
@@ -44,6 +55,7 @@ const routes = [
         path: '',
         name: 'Home',
         component: Home,
+        beforeEnter: isLoggedin
       },
         {
           path: '/Failedimage/:vehId/:imgName',
