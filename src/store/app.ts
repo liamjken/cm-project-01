@@ -14,7 +14,6 @@ export const useAppStore = defineStore('app', {
     sandboxComp: true,
     isSelecting: false,
     uploadImgURL: 'url not found',
-    doubleCheck: false
 
 
   }),
@@ -25,7 +24,8 @@ export const useAppStore = defineStore('app', {
   },
 
   actions: {
-    // Getting the API data
+
+// Getting the API data
       async fetchFailedImages() {
         try {
           const data = await axios.get(`${apiUrl}/failed-images`)
@@ -36,14 +36,12 @@ export const useAppStore = defineStore('app', {
             console.log(error)
         }
       },
-      // This function is via @error request in Failedimage.vue works but not exactly how I expected.
+      
       ImgErCheck() {
         this.isImageValid = false
         return this.isImageValid
       },
-
-
-      
+// Updating Status  
  async PostEditImg(dvId:string, nameId:string, status:number) {
       try {
         const data = await axios.put(`${apiUrl}/dealer-vehicle-listings/${dvId}/images/update-statuses`,  {
@@ -55,7 +53,7 @@ export const useAppStore = defineStore('app', {
             }
           ]
         })
-       if(data.status === 200) {
+       if(data.status === 200 || data.status === 201) {
         this.completed = true
        }
        console.log(data.status)
@@ -65,8 +63,8 @@ export const useAppStore = defineStore('app', {
           console.log(error)
       }
       },
-
-    async  downloadImage(dvId:string, nameId:string) {
+// Download Image & Update Status
+    async  downloadImage(dvId:string, nameId:string, status:number) {
         const imgUrl = `https://cm2p0vehiclemediadev.blob.core.windows.net/vehicle-media/${dvId}/${nameId}-Original`
         const imgDets = await axios.get(imgUrl, {
           responseType: 'blob'
@@ -80,25 +78,10 @@ export const useAppStore = defineStore('app', {
         document.body.removeChild(link)
         window.URL.revokeObjectURL(newUrl)
 
-        try {
-          const data = await axios.put(`${apiUrl}/dealer-vehicle-listings/${dvId}/images/update-statuses`,  {
-            "dealerVehicleListingId": `${dvId}`,
-            "imageStatuses": [
-              {
-                "id": `${nameId}`,
-                "processingStatus": '4'
-              }
-            ]
-          })
-         console.log(data.status)
-         if(data.status == 200){
-         }
-          }
-          catch (error) {
-            alert(error)
-            console.log(error)
-        }
+        this.PostEditImg(dvId, nameId, status)
       },
+
+// Generate API link to upload image   
       async beforeUploadImage(dvId:string, nameId:string) {
         try {
           const data = await axios.post(`https://vehiclemedia-service.dev.carpix2p0.net/api/1.0/vehicle-media/vehicle-listings/${dvId}/upload-links/${nameId}/rewrite-link`,  {
@@ -112,31 +95,9 @@ export const useAppStore = defineStore('app', {
             alert(error)
             console.log(error)
         }
+      },	
 
-        },
-
-        dialogStatUpdate(){
-        this.completed = true
-
-        },
-
-       async endStatusUpdate(dvId:string, nameId:string, status:number) {
-        try {
-          await axios.put(`${apiUrl}/dealer-vehicle-listings/${dvId}/images/update-statuses`,  {
-            "dealerVehicleListingId": `${dvId}`,
-            "imageStatuses": [
-              {
-                "id": `${nameId}`,
-                "processingStatus": `${status}`
-              }
-            ]
-          })
-        } catch (error) {
-          alert(error)
-          console.log(error)
-        }
-        },
-
+// Manage Login for Editor & Reviewer
         mylogin (email: string, password: string) {
 
           let editor = 'editor@test.com'
@@ -153,14 +114,14 @@ export const useAppStore = defineStore('app', {
           return null
 
         },
-
+// Logout
         mylogout() {
           sessionStorage.removeItem("role")
         },
 
-        updateCheck(){
-         this.doubleCheck = !this.doubleCheck
-        },
+      loginDialog() {
+        this.completed = true
+      }
 
     },
 

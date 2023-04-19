@@ -1,6 +1,7 @@
 <template>
     <!-- Dialog Box that appears when Failed Image Status is updated. -->
-        <Dialogbox @dialog-closed="updateCheck()">
+        <Dialogbox @dialog-closed="updateCheck()"
+        class="alert-dialog">
         <template v-slot:title>
           Image Updated
         </template>
@@ -53,17 +54,17 @@
     
     </template>
     
-    <!-- Creating the button to Open Image -->
+    <!-- Creating the button to Download Image -->
     <template #item-indicator.actiontwo="item">
       <v-btn v-if="item.status === 'NeedEditing'" 
         class="mt-3 mb-3"
         prepend-icon="mdi-cloud-download"
         color="download"
-        @click.once="downloadImage(item.vehicleId, item.name), updateCheck()"
+        @click.once="downloadImage(item.vehicleId, item.name, 4), updateCheck()"
       >
     Download
       </v-btn>
-
+    <!-- Creating the button to Upload Image -->
       <v-btn  v-if="item.status === 'Editing'" 
         class="mt-3 mb-3"
         prepend-icon="mdi-cloud-upload"
@@ -71,7 +72,7 @@
         @click="beforeUploadImage(item.vehicleId, item.name ), selectFile()"
       >
     <span>Upload</span>
-  
+      <!-- Spinner Overlay when uploading -->
         <v-overlay
           :model-value="spinnerLoad"
           class="align-center justify-center"
@@ -145,7 +146,7 @@
   
     },
     methods: {
-  
+  // selecting a File and uploading it to the API
       selectFile(){
         let fileInputElement : any = this.$refs.file;
         fileInputElement.click();
@@ -160,13 +161,12 @@
         .then(res => {
           console.log(res)
           if(res.status === 201) {
-            this.dialogStatUpdate()
             this.updateCheck()
          }
         })
   .finally(() => {
     this.spinnerLoad = false
-    this.endStatusUpdate(dvId, nameId, status)
+    this.PostEditImg(dvId, nameId, status)
   })
     
       },
@@ -177,8 +177,6 @@
       'ImgErCheck',
       'downloadImage',
       "beforeUploadImage",
-      'dialogStatUpdate',
-      'endStatusUpdate',
       ]),
 
       updateCheck(){
@@ -217,6 +215,7 @@
   .input-file__input {
   display: none;
   }
+
   
   
   </style>

@@ -17,7 +17,7 @@
             <div v-if="img.name === $route.params.imgName && img.status === 'Editing'">
             <!-- Updating the Status & goes back to previous page    -->  
               <v-btn 
-              @click.once="PostEditImg(img.vehicleId, img.name, 3), $router.go(-1)"
+              @click.once="PostEditImg(img.vehicleId, img.name, 5), $router.go(-1)"
               class="mt-3 mb-3 float-right"
               prepend-icon=""
               color="primary">

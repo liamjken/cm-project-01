@@ -1,4 +1,15 @@
 <template>
+
+<Dialogbox>
+        <template v-slot:title>
+          Wrong Login
+        </template>
+        <template v-slot:content>
+          The Login Info you entered is incorrect
+        </template>
+      </Dialogbox>
+
+
   <v-container class="login-box d-flex justify-center">
     <v-card width="400" class="px-4 py-4">
       <v-text-field
@@ -27,10 +38,16 @@
 
 <script lang="ts">
   import { defineComponent, computed } from "vue"
-  import { mapActions, mapState } from 'pinia';
+  import { mapActions, mapState } from 'pinia'
   import { useAppStore } from '../store/app'
+  import Dialogbox from '../components/DialogBox.vue'
+import store from "@/store"
 
   export default defineComponent({
+    components: {
+      Dialogbox
+    },
+  
 
     data: () => ({ 
       email: '',
@@ -48,14 +65,15 @@
     methods: {
 
       ...mapActions(useAppStore,[
-      'mylogin'
+      'mylogin',
+      'loginDialog'
       ]),
 
       enterLogin(){
         let result = this.mylogin(this.email, this.password)
 
         if(result == null){
-          alert('this Login is invalid')
+          this.loginDialog()
         } else if(result == 'editor') {
           this.$router.replace('/Editor')
         } else if(result == 'reviewer'){
@@ -68,9 +86,10 @@
 })
 </script>
 
-<style>
+<style scoped>
 .login-box {
   vertical-align: middle;
 }
+
 
 </style>
