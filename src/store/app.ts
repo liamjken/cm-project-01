@@ -8,6 +8,8 @@ let apiUrl = 'https://qualitycontrol-service.dev.carpix2p0.net/api/1.0'
 export const useAppStore = defineStore('app', {
   state: () => ({
 
+    // branch update
+
     failedImages: [],
     isImageValid: true,
     completed: false,
