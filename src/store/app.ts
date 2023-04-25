@@ -102,6 +102,7 @@ export const useAppStore = defineStore('app', {
 
           let editor = 'editor@test.com'
           let reviewer = 'reviewer@test.com'
+          let admin = 'admin@test.com'
           let pass = 'Auto123'
 
           if(email == editor && password == pass){
@@ -110,6 +111,9 @@ export const useAppStore = defineStore('app', {
           } else if (email == reviewer && password == pass) {
             sessionStorage.setItem("role", 'hqc2xfn_buv3yuj5MEC');
             return 'reviewer'
+          } else if (email == admin && password == pass){
+            sessionStorage.setItem("role", 'pbr_DAQ6hgd_hgy-vkj');
+            return 'admin'
           }
           return null
 

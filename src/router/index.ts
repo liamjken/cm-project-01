@@ -6,6 +6,7 @@ import Sandbox from '../views/Sandbox.vue'
 import Editor from '../views/Editor.vue'
 import Reviewer from '../views/Reviewer.vue'
 import PageNotFound from '../views/PageNotFound.vue'
+import Admin from '../views/Admin.vue'
 
 function isEditor(to: any, from: any, next:any) {
   let userRole = sessionStorage.getItem('role')
@@ -13,9 +14,13 @@ function isEditor(to: any, from: any, next:any) {
     next()
     return
   }
-  if (userRole == 'hqc2xfn_buv3yuj5MEC') {
+ else if (userRole == 'hqc2xfn_buv3yuj5MEC') {
     next({ path: '/Reviewer' })
-  } else{
+  }
+  else if (userRole == 'pbr_DAQ6hgd_hgy-vkj') {
+    next({ path: '/Admin' })
+  }
+  else{
     next({ path: '/' })
   }
 
@@ -27,9 +32,30 @@ function isReviewer(to: any, from: any, next:any) {
     next()
     return
   }
-  if (userRole == 'hzc*EUW_vay4zue4gdb') {
+  else if (userRole == 'hzc*EUW_vay4zue4gdb') {
     next({ path: '/Editor' })
-  } else{
+  } 
+  else if (userRole == 'pbr_DAQ6hgd_hgy-vkj') {
+    next({ path: '/Admin' })
+  }
+  else{
+    next({ path: '/' })
+  }
+
+}
+
+function isAdmin(to: any, from: any, next:any) {
+  let userRole = sessionStorage.getItem('role')
+  if (userRole == 'pbr_DAQ6hgd_hgy-vkj') {
+    next()
+    return
+  }
+  else if (userRole == 'hzc*EUW_vay4zue4gdb') {
+    next({ path: '/Editor' })
+  } else if (userRole == 'hqc2xfn_buv3yuj5MEC') {
+    next({ path: '/Reviewer' })
+  }
+  else{
     next({ path: '/' })
   }
 
@@ -41,6 +67,8 @@ function isLoggedin(to: any, from: any, next:any){
     next({ path: '/Reviewer' })
   } else if (userRole == 'hzc*EUW_vay4zue4gdb') {
     next({ path: '/Editor' })
+}   else if (userRole == 'pbr_DAQ6hgd_hgy-vkj') {
+  next({ path: '/Admin' })
 } else {
   next()
   return
@@ -58,29 +86,35 @@ const routes = [
         beforeEnter: isLoggedin
       },
         {
-          path: '/Failedimage/:vehId/:imgName',
+          path: '/failedimage/:vehId/:imgName',
           name: 'Failedimage',
           component: Failedimage,
           props: true,
           beforeEnter: isEditor,
       },
       {
-        path: '/Sandbox',
+        path: '/sandbox',
         name: 'Sandbox',
         component: Sandbox,
         beforeEnter: isEditor,
     },
     {
-      path: '/Editor',
+      path: '/rditor',
       name: 'Editor',
       component: Editor,
       beforeEnter: isEditor,
   },
   {
-    path: '/Reviewer',
+    path: '/reviewer',
     name: 'Reviewer',
     component: Reviewer,
     beforeEnter: isReviewer,
+},
+{
+  path: '/admin',
+  name: 'Admin',
+  component: Admin,
+  beforeEnter: isAdmin,
 },
 {
   path: '/:pathMatch(.*)*',

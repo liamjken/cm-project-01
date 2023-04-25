@@ -75,9 +75,11 @@ import store from "@/store"
         if(result == null){
           this.loginDialog()
         } else if(result == 'editor') {
-          this.$router.replace('/Editor')
+          this.$router.replace('/editor')
         } else if(result == 'reviewer'){
-          this.$router.replace('/Reviewer')
+          this.$router.replace('/reviewer')
+        } else if(result == 'admin'){
+          this.$router.replace('/admin')
         }
       }
 
