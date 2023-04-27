@@ -14,6 +14,8 @@ export const useAppStore = defineStore('app', {
     sandboxComp: true,
     isSelecting: false,
     uploadImgURL: 'url not found',
+    adminData: [],
+    reviewers: '',
 
 
   }),
@@ -125,7 +127,20 @@ export const useAppStore = defineStore('app', {
 
       loginDialog() {
         this.completed = true
-      }
+      },
+      // Getting the API data for Admin Page
+      async fetchAdminDetails(dateFrom:any, dateTo:any) {
+        try {
+          const data = await axios.get(`${apiUrl}/dealer-vehicle-listings/images/statistics/?from=${dateFrom}&to=${dateTo}`)
+            this.adminData = data.data
+            this.reviewers = data.data.reviewers
+          }
+          catch (error) {
+            alert(error)
+            console.log(error)
+        }
+        console.log(this.adminData)
+      },
 
     },
 
