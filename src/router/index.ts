@@ -99,7 +99,7 @@ const routes = [
         beforeEnter: isEditor,
     },
     {
-      path: '/rditor',
+      path: '/editor',
       name: 'Editor',
       component: Editor,
       beforeEnter: isEditor,
