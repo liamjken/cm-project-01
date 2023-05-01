@@ -142,6 +142,11 @@ export const useAppStore = defineStore('app', {
         console.log(this.adminData)
       },
 
+      calcPercentage(num1:number, num2:number ){
+        let percentage = (num1 / num2) * 100;
+        return Math.round(percentage)
+      }
+
     },
 
   

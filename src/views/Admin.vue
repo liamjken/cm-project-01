@@ -15,11 +15,11 @@
             </v-col>
            <v-col  cols="12" sm="4">
             <v-progress-circular 
-            model-value="2" 
+            :model-value="2" 
             size="160" 
             width="40"
             bg-color="primary"
-      color="secondary" ><h1 class="color-blue">2%</h1></v-progress-circular>
+      color="secondary" ><h1 class="color-blue">{{ calcPercentage(adminData.totalAccepted, adminData.totalToReview) }}%</h1></v-progress-circular>
            </v-col>
             <v-col  cols="12" sm="6">
 
@@ -122,6 +122,7 @@
 
 
 
+
 },
     updated() {
     },
@@ -141,7 +142,8 @@
         },
   
       ...mapActions(useAppStore,[
-    'fetchAdminDetails'
+    'fetchAdminDetails',
+    'calcPercentage'
       ]),
   
     },
