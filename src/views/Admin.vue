@@ -15,11 +15,11 @@
             </v-col>
            <v-col  cols="12" sm="4">
             <v-progress-circular 
-            :model-value="2" 
+            :model-value="circlePercentage" 
             size="160" 
             width="40"
             bg-color="primary"
-      color="secondary" ><h1 class="color-blue">{{ calcPercentage(adminData.totalAccepted, adminData.totalToReview) }}%</h1></v-progress-circular>
+      color="secondary" ><h1 class="circle-percentage">{{ circlePercentage }}%</h1></v-progress-circular>
            </v-col>
             <v-col  cols="12" sm="6">
 
@@ -95,6 +95,7 @@
 
         </v-row>
 {{ adminData }}
+{{ circlePercentage }}
 
      </v-main>
     </v-container>
@@ -129,7 +130,7 @@
 
     computed: {
       ...mapState(useAppStore, 
-     ['adminData', 'reviewers'])
+     ['adminData', 'reviewers', 'circlePercentage'])
     },
     created() {
   
@@ -145,7 +146,6 @@
     'fetchAdminDetails',
     'calcPercentage'
       ]),
-  
     },
     watch: {
         fromDate() {
@@ -159,7 +159,7 @@
             let newtoDate = toDate.replace(/T/g, " ");
             this.toDate = newtoDate
             this.fetchAdminDetails(`${this.fromDate}:00.000`, `${this.toDate}:00.000`);
-      }
+      },
     }
   
   
@@ -175,8 +175,8 @@
     font-weight: 800;
   }
 
-  .color-blue{
-    color: blue;
+  .circle-percentage{
+    color: black;
   }
   
   </style>

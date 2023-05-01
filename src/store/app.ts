@@ -16,6 +16,7 @@ export const useAppStore = defineStore('app', {
     uploadImgURL: 'url not found',
     adminData: [],
     reviewers: '',
+    circlePercentage: 0
 
 
   }),
@@ -134,6 +135,7 @@ export const useAppStore = defineStore('app', {
           const data = await axios.get(`${apiUrl}/dealer-vehicle-listings/images/statistics/?from=${dateFrom}&to=${dateTo}`)
             this.adminData = data.data
             this.reviewers = data.data.reviewers
+            this.circlePercentage = this.calcPercentage(data.data.totalAccepted, data.data.totalToReview)
           }
           catch (error) {
             alert(error)
