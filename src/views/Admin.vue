@@ -165,7 +165,9 @@ size="180"
 width="10"
 bg-color="simpleGrey"
 color="red"
-class="ma-1" ><h3>Total in Review</h3>
+class="ma-1" ><div align="center" justify="center">
+<h3>Total in Review</h3>
+<h1>{{ adminData.totalInReview }}</h1></div>
 </v-progress-circular>
 <v-progress-circular 
 :model-value="needEditing" 
@@ -173,7 +175,12 @@ size="180"
 width="10"
 bg-color="simpleGrey"
 color="green"
-class="ma-1" ><h3>Total Need Editing</h3></v-progress-circular>
+class="ma-1" >
+<div align="center" justify="center">
+<h3>Total Need Editing</h3>
+<h1>{{ adminData.totalNeedEditing }}</h1>
+</div>
+</v-progress-circular>
 
 <v-progress-circular 
 :model-value="TotalCompleted" 
@@ -181,7 +188,12 @@ size="180"
 width="10"
 bg-color="simpleGrey"
 color="orange"
-class="ma-1" ><h3>Total Completed</h3></v-progress-circular>
+class="ma-1" >
+<div align="center" justify="center">
+<h3>Total Completed</h3>
+<h1>{{ adminData.totalCompleted }}</h1>
+</div>
+</v-progress-circular>
 
 <v-progress-circular 
 :model-value="Editing" 
@@ -189,7 +201,11 @@ size="180"
 width="10"
 bg-color="simpleGrey"
 color="blue"
-class="ma-1" ><h3>Total Editing</h3>
+class="ma-1" >
+<div align="center" justify="center">
+<h3>Total Editing</h3>
+<h1>{{ adminData.totalEditing }}</h1>
+</div>
 </v-progress-circular>
 </v-col>
         </v-row>
