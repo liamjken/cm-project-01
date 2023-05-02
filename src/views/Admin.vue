@@ -237,8 +237,7 @@ class="ma-1" ><h3>Total Editing</h3>
   
   data: () => ({
     fromDate: '2023-01-01 00:00',
-    toDate: '2023-05-02 00:00',
-    today: '',
+    toDate: '',
     reviewUsers: '',
     switchStatView: false
 
@@ -252,6 +251,7 @@ class="ma-1" ><h3>Total Editing</h3>
 
 },
     updated() {
+      this.todaysDate()
     },
 
     computed: {
@@ -264,8 +264,11 @@ class="ma-1" ><h3>Total Editing</h3>
     methods: {
         todaysDate(){
             let date = new Date()
-            let todays = date.toLocaleDateString().replace(/\//g, "-")
-            this.today = `${todays} 00:00`
+            let year = date.getFullYear()
+            let month = date.getMonth() + 1
+            let day = date.getDay()
+
+            this.toDate = `${year}-0${month}-0${day} 00:00`
         },
   
       ...mapActions(useAppStore,[
