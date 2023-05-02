@@ -21,7 +21,9 @@ export default createVuetify({
           secondary: '#88cf1b',
           masthead: '#231f20',
           download: '#a03030',
-          upload: '#d4edd1'
+          upload: '#d4edd1',
+          simpleGrey: '#c4bfbf',
+
         },
       },
     },

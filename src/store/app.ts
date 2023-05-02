@@ -16,7 +16,11 @@ export const useAppStore = defineStore('app', {
     uploadImgURL: 'url not found',
     adminData: [],
     reviewers: '',
-    circlePercentage: 0
+    circlePercentage: 0,
+    inReview: 0,
+    needEditing: 0,
+    TotalCompleted: 0,
+    Editing: 0  
 
 
   }),
@@ -136,6 +140,10 @@ export const useAppStore = defineStore('app', {
             this.adminData = data.data
             this.reviewers = data.data.reviewers
             this.circlePercentage = this.calcPercentage(data.data.totalAccepted, data.data.totalToReview)
+            this.inReview = this.calcPercentage(data.data.totalInReview, data.data.totalAccepted)
+            this.needEditing = this.calcPercentage(data.data.totalNeedEditing, data.data.totalAccepted)
+            this.TotalCompleted = this.calcPercentage(data.data.totalCompleted, data.data.totalAccepted)
+            this.Editing = this.calcPercentage(data.data.totalEditing, data.data.totalAccepted)
           }
           catch (error) {
             alert(error)
