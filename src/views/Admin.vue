@@ -237,7 +237,7 @@ class="ma-1" ><h3>Total Editing</h3>
   
   data: () => ({
     fromDate: '2023-01-01 00:00',
-    toDate: '',
+    toDate: '2023-05-02 00:00',
     today: '',
     reviewUsers: '',
     switchStatView: false
@@ -245,8 +245,7 @@ class="ma-1" ><h3>Total Editing</h3>
   }),
   
     mounted() {
-        this.todaysDate()
-        this.fetchAdminDetails(`${this.fromDate}:00.000`, `${this.today}:00.000`)
+        this.fetchAdminDetails(`${this.fromDate}:00.000`, `${this.toDate}:00.000`)
 
 
 
@@ -260,7 +259,7 @@ class="ma-1" ><h3>Total Editing</h3>
      ['adminData', 'reviewers', 'circlePercentage', 'Editing', 'TotalCompleted', 'inReview', 'needEditing'])
     },
     created() {
-  
+      this.todaysDate()
     },
     methods: {
         todaysDate(){
@@ -283,8 +282,8 @@ class="ma-1" ><h3>Total Editing</h3>
     watch: {
         fromDate() {
             let fromDate = this.fromDate
-            let newDate = fromDate.replace(/T/g, " ");
-            this.fromDate = newDate
+            let newfromDate = fromDate.replace(/T/g, " ");
+            this.fromDate = newfromDate
             this.fetchAdminDetails(`${this.fromDate}:00.000`, `${this.toDate}:00.000`);
         },
             toDate() {
