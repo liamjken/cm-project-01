@@ -214,7 +214,7 @@ class="ma-1" >
             <!-- Reviewers section -->    
             <h1>Review Agents</h1>    
         <v-row justify="center">
-            <v-col class="py-10 bg-white ma-3 rounded-lg elevation-2" v-for=" reviewer in reviewers" :key="reviewer.total">
+            <v-col class="py-10 bg-white ma-3 rounded-lg elevation-2" v-for=" reviewer,index in reviewers" :key="index">
                 <div justify="center" style="text-align: center;">
                     <div>
                         <v-avatar  size="80" color="primary">
