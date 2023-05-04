@@ -2,6 +2,13 @@
     <v-container>
      <v-main>
         <h1>Admin Portal</h1>
+        <div v-for="circle,index in circleInfo" :key="index">
+          {{ circle.color }}
+        </div>
+        {{ reviewers }}
+<div>
+        {{ circleInfo }}</div>
+        <br>
         <v-row>
             <v-col><v-text-field type="datetime-local" label="From" v-model="fromDate"></v-text-field></v-col>
             <v-col><v-text-field type="datetime-local" label="to" v-model="toDate"></v-text-field></v-col>
@@ -272,7 +279,7 @@ class="ma-1" >
 
     computed: {
       ...mapState(useAppStore, 
-     ['adminData', 'reviewers', 'circlePercentage', 'Editing', 'TotalCompleted', 'inReview', 'needEditing'])
+     ['adminData', 'reviewers', 'circlePercentage', 'Editing', 'TotalCompleted', 'inReview', 'needEditing', 'circleInfo'])
     },
     created() {
       this.todaysDate()

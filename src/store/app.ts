@@ -20,7 +20,8 @@ export const useAppStore = defineStore('app', {
     inReview: 0,
     needEditing: 0,
     TotalCompleted: 0,
-    Editing: 0  
+    Editing: 0,
+    circleInfo: {} 
 
 
   }),
@@ -144,6 +145,20 @@ export const useAppStore = defineStore('app', {
             this.needEditing = this.calcPercentage(data.data.totalNeedEditing, data.data.totalAccepted)
             this.TotalCompleted = this.calcPercentage(data.data.totalCompleted, data.data.totalAccepted)
             this.Editing = this.calcPercentage(data.data.totalEditing, data.data.totalAccepted)
+            this.circleInfo = [{
+              "name": "Total in Review",
+              "value": data.data.totalInReview,
+              "color": "red",
+              "perc": this.calcPercentage(data.data.totalInReview, data.data.totalAccepted)
+
+            },
+            {
+             "name": "Total Need Editing",
+              "value": data.data.totalNeedEditing,
+              "color": "green",
+              "perc": this.calcPercentage(data.data.totalNeedEditing, data.data.totalAccepted)
+            }]
+      
           }
           catch (error) {
             alert(error)
