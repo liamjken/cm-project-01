@@ -27,7 +27,7 @@
 :model-value="circle.perc" 
 size="180" 
 width="10"
-bg-color="simpleGrey"
+bg-color="simpleGrey" 
 :color="circle.color"
 class="mx-3" ><div align="center" justify="center">
 <h3>{{ circle.name }}</h3>
