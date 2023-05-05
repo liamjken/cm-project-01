@@ -157,7 +157,22 @@ export const useAppStore = defineStore('app', {
               "value": data.data.totalNeedEditing,
               "color": "green",
               "perc": this.calcPercentage(data.data.totalNeedEditing, data.data.totalAccepted)
-            }]
+            },
+            {
+              "name": "Total Completed",
+               "value": data.data.totalCompleted,
+               "color": "orange",
+               "perc": this.calcPercentage(data.data.totalCompleted, data.data.totalAccepted)
+             },
+             {
+              "name": "Total Editing",
+               "value": data.data.totalEditing,
+               "color": "blue",
+               "perc": this.calcPercentage(data.data.totalEditing, data.data.totalAccepted)
+             }
+             
+          
+          ]
       
           }
           catch (error) {

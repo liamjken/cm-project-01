@@ -2,13 +2,7 @@
     <v-container>
      <v-main>
         <h1>Admin Portal</h1>
-        <div v-for="circle,index in circleInfo" :key="index">
-          {{ circle.color }}
-        </div>
-        {{ reviewers }}
-<div>
-        {{ circleInfo }}</div>
-        <br>
+        
         <v-row>
             <v-col><v-text-field type="datetime-local" label="From" v-model="fromDate"></v-text-field></v-col>
             <v-col><v-text-field type="datetime-local" label="to" v-model="toDate"></v-text-field></v-col>
@@ -17,7 +11,7 @@
           
         </v-row>
         
-        <v-row  align="center" justify="center">
+        <v-row justify="center">
             <!-- Text Totals -->
             <v-col  cols="12" sm="2">
                <h2>Total To Review:</h2>
@@ -26,195 +20,22 @@
                <h4>Total Accepted:</h4>
                <h1>{{ adminData.totalAccepted }}</h1>
             </v-col>
-            <!-- Total Percentage 
-           <v-col  cols="12" sm="2">
-            <v-progress-circular 
-            :model-value="circlePercentage" 
-            size="100" 
-            width="15"
-            bg-color="primary"
-      color="secondary"
-      class="" ><h1 class="circle-percentage">{{ circlePercentage }}%</h1></v-progress-circular>
-           </v-col> -->
-            <!-- Circle Diagram -->
-           <v-col v-if="!switchStatView"  cols="12" sm="2">
-
-            <v-progress-circular 
-            :model-value="inReview" 
-            size="180" 
-            width="10"
-            bg-color="simpleGrey"
-      color="red"
-      class="" >
-    
-      <v-progress-circular 
-            :model-value="needEditing" 
-            size="140" 
-            width="10"
-            bg-color="simpleGrey"
-      color="green"
-      class="" >
-      <v-progress-circular 
-            :model-value="TotalCompleted" 
-            size="100" 
-            width="10"
-            bg-color="simpleGrey"
-      color="orange"
-      class="" >
-      <v-progress-circular 
-            :model-value="Editing" 
-            size="60" 
-            width="10"
-            bg-color="simpleGrey"
-      color="blue"
-      class="" >    <v-btn @click="switchStatViews()" icon="mdi-circle" size="x-small"></v-btn></v-progress-circular>
-    </v-progress-circular>
-    </v-progress-circular>
-    </v-progress-circular>
-
-
-           </v-col>
-            <!-- Line Diagrams -->           
-            <v-col v-if="!switchStatView"  cols="12" sm="8">
-                <v-card class="rounded-t-10 rounded-b-0">
-                    <v-row bg-color="white" class="px-2 py-1">
-                        <v-col cols="12" sm="3">{{ adminData.totalInReview }}</v-col>
-                        <v-col cols="12" sm="9">Total In Review</v-col>
-                    </v-row>
-                </v-card>
-    <v-progress-linear
-      :model-value="inReview"
-      bg-color="simpleGrey"
-      color="red"
-      height="8"
-    ></v-progress-linear>
-
-
-    <v-card class="rounded-0">
-                    <v-row bg-color="white" class="px-2 py-1">
-                        <v-col cols="12" sm="3">{{ adminData.totalNeedEditing }}</v-col>
-                        <v-col cols="12" sm="9">Total Need Editing</v-col>
-                    </v-row>
-                </v-card>
-    <v-progress-linear
-      :model-value="needEditing"
-      bg-color="simpleGrey"
-      color="green"
-      height="8"
-    ></v-progress-linear>
-
-    <v-card class="rounded-0">
-                    <v-row bg-color="white" class="px-2 py-1">
-                        <v-col cols="12" sm="3">{{ adminData.totalCompleted }}</v-col>
-                        <v-col cols="12" sm="9">Total Completed</v-col>
-                    </v-row>
-                </v-card>
-    <v-progress-linear
-      :model-value="TotalCompleted"
-      bg-color="simpleGrey"
-      color="orange"
-      height="8"
-    ></v-progress-linear>
-    <v-card class="rounded-0">
-                    <v-row bg-color="white" class="px-2 py-1">
-                        <v-col cols="12" sm="3">{{ adminData.totalEditing }}</v-col>
-                        <v-col cols="12" sm="9">Total Editing</v-col>
-                    </v-row>
-                </v-card>
-    <v-progress-linear
-      :model-value="Editing"
-      bg-color="simpleGrey"
-      color="blue"
-      height="8"
-    ></v-progress-linear>
-    <v-card class="rounded-b-10 rounded-t-0">
-                    <v-row bg-color="white" class="py-2">
-                        <v-col cols="12" sm="12"></v-col>
-                    </v-row>
-                </v-card>
-            </v-col>
-              <!-- line Diagram no text -->         
-              <v-col v-if="switchStatView"  cols="12" sm="2">
-              <v-card align="center" justify="center" class="pa-5">
-    <v-progress-linear
-      :model-value="inReview"
-      bg-color="white"
-      color="red"
-      height="8"
-    ></v-progress-linear>
-    <v-progress-linear
-      :model-value="needEditing"
-      bg-color="white"
-      color="green"
-      height="8"
-    ></v-progress-linear>
-    <v-progress-linear
-      :model-value="TotalCompleted"
-      bg-color="white"
-      color="orange"
-      height="8"
-    ></v-progress-linear>
-    <v-progress-linear
-      :model-value="Editing"
-      bg-color="white"
-      color="blue"
-      height="8"
-    ></v-progress-linear>
-    <v-btn @click="switchStatViews()" icon="mdi-square" size="x-small" class="ma-auto text-center" justify-center></v-btn>
-  </v-card>    
-            </v-col>
-
           <!-- Circle Diagram spaced -->
-          <v-col v-if="switchStatView"  cols="12" sm="8">
-<v-progress-circular 
-:model-value="inReview" 
+          <div v-for="(circle,index) in circleInfo" :key="index">
+          <v-col class="liam"  cols="12" sm="8">
+          <v-progress-circular 
+:model-value="circle.perc" 
 size="180" 
 width="10"
 bg-color="simpleGrey"
-color="red"
-class="ma-1" ><div align="center" justify="center">
-<h3>Total in Review</h3>
-<h1>{{ adminData.totalInReview }}</h1></div>
-</v-progress-circular>
-<v-progress-circular 
-:model-value="needEditing" 
-size="180" 
-width="10"
-bg-color="simpleGrey"
-color="green"
-class="ma-1" >
-<div align="center" justify="center">
-<h3>Total Need Editing</h3>
-<h1>{{ adminData.totalNeedEditing }}</h1>
-</div>
+:color="circle.color"
+class="mx-3" ><div align="center" justify="center">
+<h3>{{ circle.name }}</h3>
+<h1>{{ circle.value }}</h1></div>
 </v-progress-circular>
 
-<v-progress-circular 
-:model-value="TotalCompleted" 
-size="180" 
-width="10"
-bg-color="simpleGrey"
-color="orange"
-class="ma-1" >
-<div align="center" justify="center">
-<h3>Total Completed</h3>
-<h1>{{ adminData.totalCompleted }}</h1>
-</div>
-</v-progress-circular>
-
-<v-progress-circular 
-:model-value="Editing" 
-size="180" 
-width="10"
-bg-color="simpleGrey"
-color="blue"
-class="ma-1" >
-<div align="center" justify="center">
-<h3>Total Editing</h3>
-<h1>{{ adminData.totalEditing }}</h1>
-</div>
-</v-progress-circular>
 </v-col>
+</div>
         </v-row>
         <v-divider thickness="2" class="my-5"></v-divider>
 
